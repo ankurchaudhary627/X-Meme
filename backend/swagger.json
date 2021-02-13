@@ -1,0 +1,251 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "X-Meme Application",
+    "description": "Documentation for x-meme REST APIs",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "host": "localhost:8081",
+  "paths": {
+    "/memes": {
+      "get": {
+        "tags": [
+          "List all memes"
+        ],
+        "description": "Get all memes",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched all memes from db",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "caption": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "id": "60259f2cdf65453920ac719z",
+                      "name": "user name",
+                      "url": "https://example.com/sample-image.jpg",
+                      "caption": "This is caption"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Add new meme"
+        ],
+        "description": "Post new meme",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "name": "user name",
+                  "url": "https://example.com/sample-image.jpg",
+                  "caption": "This is caption"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created new meme in db",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "id": "60259f2cdf65453920ac719z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid values in request body"
+          },
+          "409": {
+            "description": "Meme already exists"
+          }
+        }
+      }
+    },
+    "/memes/{id}": {
+      "get": {
+        "tags": [
+          "List single memes"
+        ],
+        "description": "Get a meme by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "additionalProperties": {
+                "type": "string",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": "6026bec17615073e881ea4c5"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched given meme from db",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "caption": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "id": "6026bec17615073e881ea4c5",
+                    "name": "user name",
+                    "url": "https://example.com/sample-image.jpg",
+                    "caption": "This is caption"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Meme not found with given ID"
+          },
+          "400": {
+            "description": "Given ID format is not supported"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Update meme"
+        ],
+        "description": "Update URL/ caption or both by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "additionalProperties": {
+                "type": "string",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": "6026bec17615073e881ea4c5"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "url": "https://example.com/sample-new-image.jpg",
+                  "caption": "This is new caption"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully updated given meme"
+          },
+          "404": {
+            "description": "Meme not found with given ID"
+          },
+          "400": {
+            "description": "Given ID format is not supported/ Invalid values in request body"
+          }
+        }
+      }
+    }
+  }
+}
