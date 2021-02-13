@@ -128,7 +128,7 @@ const App = () => {
               </Space>
             </div>
             <Title level={5}>
-              X-Meme App ©2020 Created by Ankur Chaudhary
+              X-Meme App ©2021 Created by Ankur Chaudhary
             </Title>
           </Footer>
         </div>
