@@ -4,12 +4,18 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
+const dotEnv = require('dotenv');
 
 // Import routes
 const memes = require('./routes/api/memes');
 
 // Import swagger doc
 const swaggerDoc = require('./swagger.json');
+
+// Config env variable
+dotEnv.config({
+  path: __dirname + '/.env'
+});
 
 const app = express();
 

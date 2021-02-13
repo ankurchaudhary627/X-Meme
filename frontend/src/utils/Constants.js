@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8081';
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
 const LINKEDIN_URL = 'https://www.linkedin.com/in/ankurchaudhary627/';
 const GITHUB_URL = 'https://github.com/ankurchaudhary627';
 const PORTFOLIO_URL = 'https://ankurchaudhary627.netlify.app';

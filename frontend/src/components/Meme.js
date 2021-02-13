@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Tooltip, Image } from 'antd';
+import { Card, Tooltip, Image, Typography } from 'antd';
 import MemeForm from './MemeForm';
 import { EditTwoTone, CopyTwoTone } from '@ant-design/icons';
 import {
@@ -10,6 +10,7 @@ import { copyImageUrlHandler } from '../helpers/CopyImageUrlHelper';
 import 'antd/dist/antd.css';
 
 const { Meta } = Card;
+const { Title, Text } = Typography;
 
 const Meme = (props) => {
   const { meme, fetchMemes } = props;
@@ -35,7 +36,7 @@ const Meme = (props) => {
       }
       <Card
         style={{ width: 300 }}
-        // hoverable
+        hoverable
         cover={
           <Image
             width={300}
@@ -51,17 +52,22 @@ const Meme = (props) => {
           <Tooltip title='Edit meme'>
             <EditTwoTone
               key='edit'
+              style={{ fontSize: 30 }}
               onClick={() => setupdateMeme(true)}
             />
           </Tooltip>,
           <Tooltip title='Copy image URL'>
-            <CopyTwoTone key='copy' onClick={() => copyImageUrlHandler(url)} />
+            <CopyTwoTone
+              key='copy'
+              style={{ fontSize: 30 }}
+              onClick={() => copyImageUrlHandler(url)}
+            />
           </Tooltip>,
         ]}
       >
         <Meta
-          title={caption}
-          description={`Posted by: ${name}`}
+          title={<Title level={3}>{caption}</Title>}
+          description={<Text code>{`Posted by: ${name}`}</Text>}
         />
       </Card>
       <br />

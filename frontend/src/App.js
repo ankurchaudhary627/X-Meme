@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import MemeList from './components/MemeList';
 import MemeForm from './components/MemeForm';
-import { Button, Layout, Empty, Space, Typography, Tooltip } from 'antd';
-import { LinkedinFilled, GithubFilled, MailFilled } from '@ant-design/icons';
+import {
+  Button,
+  Layout,
+  Empty,
+  Space,
+  Typography,
+  Spin,
+  Tooltip
+} from 'antd';
+import {
+  LinkedinFilled,
+  GithubFilled,
+  GlobalOutlined,
+  LoadingOutlined
+} from '@ant-design/icons';
 import axios from 'axios';
 import {
   BASE_URL,
@@ -16,16 +29,26 @@ import './App.css';
 
 const { Footer } = Layout;
 const { Title } = Typography;
+const loadingIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
 const App = () => {
   const [addMeme, setaddMeme] = useState(false);
   const [memes, setmemes] = useState([]);
+  const [loadingMemes, setloadingMemes] = useState(false);
+  const [isEmpty, setisEmpty] = useState(false);
 
   const fetchMemes = () => {
+    setloadingMemes(true);
     axios.get(`${BASE_URL}/memes`)
       .then((res) => {
-        setmemes(res.data);
+        if (res.data.length === 0) {
+          setisEmpty(true);
+        } else {
+          setisEmpty(false);
+          setmemes(res.data);
+        }
       })
+      .then(() => setloadingMemes(false))
       .catch((err) => {
         console.log(err);
       });
@@ -61,12 +84,18 @@ const App = () => {
               null
           }
           {
-            memes.length === 0 ?
+            isEmpty ?
               <div className='content-empty'>
                 <Empty
                   description='No memes here..'
                 />
               </div>
+              :
+              null
+          }
+          {
+            loadingMemes ?
+              <Spin indicator={loadingIcon} />
               :
               <MemeList
                 memes={memes}
@@ -79,13 +108,22 @@ const App = () => {
             <div className='footer-links'>
               <Space size='middle'>
                 <Tooltip title='Linkedin'>
-                  <LinkedinFilled onClick={() => openURL(LINKEDIN_URL)} />
+                  <LinkedinFilled
+                    style={{ fontSize: 48 }}
+                    onClick={() => openURL(LINKEDIN_URL)}
+                  />
                 </Tooltip>
                 <Tooltip title='Github'>
-                  <GithubFilled onClick={() => openURL(GITHUB_URL)} />
+                  <GithubFilled
+                    style={{ fontSize: 48 }}
+                    onClick={() => openURL(GITHUB_URL)}
+                  />
                 </Tooltip>
                 <Tooltip title='Portfolio'>
-                  <MailFilled onClick={() => openURL(PORTFOLIO_URL)} />
+                  <GlobalOutlined
+                    style={{ fontSize: 48 }}
+                    onClick={() => openURL(PORTFOLIO_URL)}
+                  />
                 </Tooltip>
               </Space>
             </div>
