@@ -24,6 +24,7 @@ import {
   PORTFOLIO_URL
 } from './utils/Constants';
 import { openURL } from './helpers/OpenUrlHelper';
+import Particles from 'react-particles-js';
 
 import './App.css';
 
@@ -67,7 +68,12 @@ const App = () => {
       <div className='app'>
         <div className='header'>
           <h1>Welcome to X-Meme</h1>
-          <Button key='add-meme' type='primary' onClick={() => setaddMeme(true)}>
+          <Button
+            key='add-meme'
+            type='primary'
+            onClick={() => setaddMeme(true)}
+            size={'large'}
+          >
             Add meme
           </Button>
         </div>
@@ -133,6 +139,41 @@ const App = () => {
           </Footer>
         </div>
       </div>
+      <Particles
+        params={{
+          "particles": {
+            "number": {
+              "value": 160,
+              "density": {
+                "enable": false
+              }
+            },
+            "size": {
+              "value": 10,
+              "random": true
+            },
+            "move": {
+              "direction": "bottom",
+              "out_mode": "out"
+            },
+            "line_linked": {
+              "enable": false
+            }
+          },
+          "interactivity": {
+            "events": {
+              "onclick": {
+                "enable": true,
+                "mode": "remove"
+              }
+            },
+            "modes": {
+              "remove": {
+                "particles_nb": 10
+              }
+            }
+          }
+        }} />
     </div>
   );
 }
