@@ -1,3 +1,3 @@
 module.exports = {
-  mongoURI: `mongodb+srv://test01:${process.env.MONGODB_USER_KEY}@hack-news.0jgof.mongodb.net/Xmeme?retryWrites=true&w=majority`,
+  mongoURI: 'mongodb://127.0.0.1:27017/Xmeme',
 };
