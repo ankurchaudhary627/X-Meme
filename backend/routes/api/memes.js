@@ -61,7 +61,7 @@ router.get('/memes/:id', (req, res) => {
 // @access Public
 router.post('/memes', (req, res) => {
   const { name, url, caption } = req.body;
-  const validName = name && name.match('^[A-Za-z]+[\\s,]?[A-Za-z0-9]+$');
+  const validName = name && name.match('^[A-Za-z]+[\\s,]?[A-Za-z0-9]+.*$');
   const validURL = url && url.match('(http(s)?:\/\/)[-a-zA-Z0-9@:%._\+~#=]+(\/).*');
   const validCaption = caption && caption.match('^[A-Za-z]+[\\s,]?[A-Za-z0-9]+.*$');
   if (validName && validURL && validCaption) {
