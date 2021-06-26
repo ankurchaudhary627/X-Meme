@@ -62,6 +62,6 @@ MERN stack application.
     
 
 ## Feedbacks:
-  - I am always an [email](ankurchaudhary627@gmail.com)/ [linkedin](https://www.linkedin.com/in/ankurchaudhary627/) ping away for the feedbacks to improve this further or add new functionalities or discussing new ideas (not regarding this project in particular).
+  - I am always an [linkedin](https://www.linkedin.com/in/ankurchaudhary627/) ping away for the feedbacks to improve this further or add new functionalities or discussing new ideas (not regarding this project in particular).
  
 ### Want to play with the app?  [Check this out](https://meme-ex.netlify.app/)
